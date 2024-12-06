@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, useTemplateRef } from 'vue';
 
-import {
-  NButton,
-  NColorPicker,
-  NIcon,
-  NModal,
-  NSpace,
-  useMessage,
-} from 'naive-ui';
+import { NButton, NColorPicker, NModal, NSpace, useMessage } from 'naive-ui';
 
 type IconProps = {
   unicode: number;
