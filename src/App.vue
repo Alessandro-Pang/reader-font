@@ -8,8 +8,10 @@
 -->
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
+
+import { NP, NText, NUpload, NUploadDragger } from 'naive-ui';
 import opentype from 'opentype.js';
-import { NUpload, NUploadDragger, NText, NP } from 'naive-ui';
+
 const iconList: Ref<any[]> = ref([]);
 
 function handleUploadChange(evt) {
