@@ -2,7 +2,7 @@
  * @Author: zi.yang
  * @Date: 2024-12-05 09:23:18
  * @LastEditors: zi.yang
- * @LastEditTime: 2024-12-06 21:25:28
+ * @LastEditTime: 2024-12-08 13:53:35
  * @Description: 
  * @FilePath: /reader-font/src/App.vue
 -->
@@ -79,7 +79,10 @@ function handleOpenEdit(icon: IconProps) {
 
 <template>
   <n-message-provider>
-    <div style="width: 80%; margin: 30px auto; min-width: 400px">
+    <header class="header">
+      Reader Font
+    </header>
+    <div style="width: 80%; margin: 30px auto;">
       <n-upload v-model:file-list="fileList" directory-dnd @update:file-list="handleUploadChange" accept=".ttf,.woff">
         <n-upload-dragger>
           <div style="margin-bottom: 12px">
@@ -116,6 +119,13 @@ function handleOpenEdit(icon: IconProps) {
 </template>
 
 <style lang=scss scoped>
+.header {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+}
 .icon-list--wrapper {
   display: flex;
   flex-wrap: wrap;
