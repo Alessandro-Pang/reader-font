@@ -110,6 +110,14 @@ function handleRotateIcon(deg: number | null) {
   svgElement.style.transform = `rotate(${iconRotate.value}deg)`
 }
 
+function handleChangeRotate(deg: number | null) {
+  if (!svgIcon.value) return
+  const svgElement = svgIcon.value!
+  iconRotate.value = deg || 0
+  svgElement.style.transform = `rotate(${iconRotate.value}deg)`
+}
+
+
 </script>
 
 <template>
@@ -129,7 +137,7 @@ function handleRotateIcon(deg: number | null) {
           <ReloadCircleOutline style="transform: rotateY(-180deg);"
             @click="handleRotateIcon(-45)" />
           <div style="padding-top: 3px">
-            <n-input-number size="medium" style="width: 200px;"  v-model:value="iconRotate" @change="handleRotateIcon"></n-input-number>
+            <n-input-number size="medium" style="width: 200px;"  v-model:value="iconRotate" @change="handleChangeRotate"></n-input-number>
           </div>
         </div>
       </div>
