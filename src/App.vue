@@ -2,7 +2,7 @@
  * @Author: zi.yang
  * @Date: 2024-12-05 09:23:18
  * @LastEditors: zi.yang
- * @LastEditTime: 2024-12-09 11:44:04
+ * @LastEditTime: 2024-12-09 19:29:04
  * @Description: 
  * @FilePath: /reader-font/src/App.vue
 -->
@@ -11,6 +11,7 @@ import { ref, Ref } from 'vue';
 
 import {
   NIcon,
+  NInput,
   NMessageProvider,
   NP,
   NText,
@@ -34,6 +35,7 @@ function handleUploadChange(evt: any) {
     fontContent.value = opentype.parse(await buffer);
   });
 }
+
 </script>
 
 <template>

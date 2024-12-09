@@ -170,6 +170,7 @@ function handleChangeRotate(deg: number | null) {
               style="width: 200px"
               v-model:value="iconRotate"
               @change="handleChangeRotate"
+               placeholder="请输入角度"
             ></n-input-number>
           </div>
         </div>

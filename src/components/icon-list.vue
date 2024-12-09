@@ -2,13 +2,14 @@
  * @Author: zi.yang
  * @Date: 2024-12-09 11:34:25
  * @LastEditors: zi.yang
- * @LastEditTime: 2024-12-09 11:45:19
+ * @LastEditTime: 2024-12-09 19:39:32
  * @Description: 字体列表
  * @FilePath: /reader-font/src/components/icon-list.vue
 -->
 <script setup lang="ts">
 import { ref, Ref, useTemplateRef, watchEffect } from 'vue';
 
+import { NButton, NInput, NInputGroup } from 'naive-ui';
 import type { Font, GlyphSet } from 'opentype.js';
 
 import iconDetail from './icon-detail.vue';
@@ -47,24 +48,43 @@ function generatorIconList(font: Font) {
   return genIconList;
 }
 
+const allIconList: Ref<IconProps[]> = ref([]);
 const iconList: Ref<IconProps[]> = ref([]);
 
 watchEffect(() => {
-  iconList.value = generatorIconList(props.font);
+  allIconList.value = generatorIconList(props.font);
+  iconList.value = allIconList.value;
 });
 
 const iconDetailRef = useTemplateRef('iconDetailRef');
 function handleOpenEdit(icon: IconProps) {
   iconDetailRef.value?.open(icon);
 }
+
+function handleSearch(text: string) {
+  iconList.value = allIconList.value.filter((item) =>
+    item.iconName.toLowerCase().includes(text.toLowerCase())
+  );
+}
 </script>
 
 <template>
+  <div style="margin: 16px 0">
+    <n-input-group style="justify-content: center">
+      <n-input @change="handleSearch" style="width: 60%" size="large" placeholder="请输入名称"></n-input>
+      <n-button type="primary" ghost size="large">搜索</n-button>
+    </n-input-group>
+  </div>
+
   <ul class="icon-list--wrapper">
     <li v-for="svg of iconList" :key="svg.unicode" class="icon--item">
       <div class="icon--item-box" @click="handleOpenEdit(svg)">
-        <svg xmlns="http://www.w3.org/2000/svg" :viewBox="svg.viewBox"
-          style="width: 100%; height: 100%" v-html="svg.svgPath"></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          :viewBox="svg.viewBox"
+          style="width: 100%; height: 100%"
+          v-html="svg.svgPath"
+        ></svg>
       </div>
       <div>{{ svg.iconName }}</div>
     </li>
@@ -85,7 +105,8 @@ function handleOpenEdit(icon: IconProps) {
 .icon--item {
   list-style: none;
   margin: 16px 0;
-  width: 10%;
+  width: 16%;
+  min-width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +118,7 @@ function handleOpenEdit(icon: IconProps) {
     margin-bottom: 16px;
     cursor: pointer;
 
-    &:hover>svg {
+    &:hover > svg {
       fill: orange;
     }
   }
