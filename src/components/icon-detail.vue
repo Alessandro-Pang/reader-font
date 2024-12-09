@@ -110,12 +110,6 @@ function handleRotateIcon(deg: number | null) {
   svgElement.style.transform = `rotate(${iconRotate.value}deg)`
 }
 
-/**
- * 仅允许输入数字
- * @param value 
- */
-const onlyAllowNumber = (value: string) => !value || /^\d+$/.test(value)
-
 </script>
 
 <template>
@@ -135,8 +129,7 @@ const onlyAllowNumber = (value: string) => !value || /^\d+$/.test(value)
           <ReloadCircleOutline style="transform: rotateY(-180deg);"
             @click="handleRotateIcon(-45)" />
           <div style="padding-top: 3px">
-            <n-input-number size="medium" style="width: 200px;" :allow-input="onlyAllowNumber"
-              v-model:value="iconRotate" @change="handleRotateIcon"></n-input-number>
+            <n-input-number size="medium" style="width: 200px;"  v-model:value="iconRotate" @change="handleRotateIcon"></n-input-number>
           </div>
         </div>
       </div>
