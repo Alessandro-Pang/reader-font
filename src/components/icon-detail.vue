@@ -1,3 +1,11 @@
+<!--
+ * @Author: zi.yang
+ * @Date: 2024-12-06 13:04:45
+ * @LastEditors: zi.yang
+ * @LastEditTime: 2024-12-14 22:55:31
+ * @Description: 图标详情
+ * @FilePath: /reader-font/src/components/icon-detail.vue
+-->
 <script setup lang="ts">
 import { ref, Ref, useTemplateRef } from 'vue';
 
