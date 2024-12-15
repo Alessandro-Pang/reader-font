@@ -2,7 +2,7 @@
  * @Author: zi.yang
  * @Date: 2024-12-06 13:04:45
  * @LastEditors: zi.yang
- * @LastEditTime: 2024-12-14 22:55:31
+ * @LastEditTime: 2024-12-15 20:35:00
  * @Description: 图标详情
  * @FilePath: /reader-font/src/components/icon-detail.vue
 -->
@@ -83,14 +83,17 @@ function downloadFile(base64Url: string, ext: string = 'svg') {
   URL.revokeObjectURL(aLink.href);
 }
 
+function getBase64Url(svg: string) {
+  return `data:image/svg+xml;base64,${btoa(svg)}`;
+}
+
 /**
  * 下载 SVG 图标
  */
 function handleDownloadSVG() {
   const svg = getSvgContent();
   if (!svg || svg.trim() === '') return;
-  const base64Url = `data:image/svg+xml;base64,${btoa(svg)}`;
-  downloadFile(base64Url, 'svg');
+  downloadFile(getBase64Url(svg), 'svg');
 }
 
 /**
@@ -109,7 +112,7 @@ function handleDownloadPNG() {
   context.fillStyle = 'transparent';
   context.fillRect(0, 0, canvas.width, canvas.height);
   const image = new Image();
-  image.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+  image.src = getBase64Url(svg);
   image.onload = () => {
     context.drawImage(image, 0, 0);
     downloadFile(canvas.toDataURL('image/png'), 'png');
