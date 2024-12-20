@@ -24,10 +24,10 @@ type IconProps = {
 const props = defineProps<{ font: Font }>();
 
 /**
- * 生成图标列表函数
+ * 从给定的字体生成图标列表。
  *
- * @param font Font对象，包含字体信息
- * @returns 返回包含图标属性的数组
+ * @param font 包含字形的字体对象。
+ * @returns 图标属性数组。
  */
 function generatorIconList(font: Font) {
   const genIconList: IconProps[] = [];
@@ -51,16 +51,30 @@ function generatorIconList(font: Font) {
 const allIconList: Ref<IconProps[]> = ref([]);
 const iconList: Ref<IconProps[]> = ref([]);
 
+/**
+ * 观察字体的变化并更新图标列表。
+ */
 watchEffect(() => {
   allIconList.value = generatorIconList(props.font);
   iconList.value = allIconList.value;
 });
 
 const iconDetailRef = useTemplateRef('iconDetailRef');
+
+/**
+ * 打开所选图标的图标详细弹窗。
+ *
+ * @param icon 要显示在详细弹窗中的图标。
+ */
 function handleOpenEdit(icon: IconProps) {
-  iconDetailRef.value?.open(icon);
+  iconDetailRef.value?.openModal(icon);
 }
 
+/**
+ * 根据搜索文本过滤图标列表。
+ *
+ * @param text 要过滤图标的名称。
+ */
 function handleSearch(text: string) {
   iconList.value = allIconList.value.filter((item) =>
     item.iconName.toLowerCase().includes(text.toLowerCase())
